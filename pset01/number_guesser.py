@@ -39,7 +39,7 @@ def number_guesser():
                 print("Too high!")
             else:
                 print(f"🎉 Congratulations! You guessed the number {number} in {attempts} attempts.\n")
-                break  # Start a new game
+                break  
 
 if __name__ == "__main__":
     number_guesser()
