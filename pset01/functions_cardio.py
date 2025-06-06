@@ -36,28 +36,28 @@ def count_of_latin_vowels(s):
 
 
 def longest_string(strings):
-    """
-    Returns the longest string from a list of strings.
+    if not strings:
+        return None  
 
-    If there are multiple strings with the same maximum length, return
-    the first one encountered.
-    """
-    # replace the pass statement with your code
-    pass
+    longest = strings[0]
+    for s in strings[1:]:
+        if len(s) > len(longest):
+            longest = s
+    return longest
+
 
 
 def word_frequencies(s):
-    """
-    Returns a dictionary with the frequency of each word in the string s.
-    The keys of the dictionary are the words, and the values are the
-    number of times each word appears in the string.
-
-    A word is defined as a sequence of characters separated by spaces.
-    You can implement this function using the split method.
-    """
-    # replace the pass statement with your code
-    pass
-
+    frequencies = {}
+    words = s.split()
+    
+    for word in words:
+        if word in frequencies:
+            frequencies[word] += 1
+        else:
+            frequencies[word] = 1
+            
+    return frequencies
 
 assert is_odd(3) == True
 assert is_odd(8) == False
