@@ -1,13 +1,3 @@
-# ----------------------------------------------------------------------
-# This is the file number_guesser.py
-
-# The intent is to give you practice writing a complete, interactive
-# Python program.
-
-# Remove the comments in this file when you have completed your program.
-# You can, and should, include your own comments, but please remove the
-# comments that are here now.
-# ----------------------------------------------------------------------
 import random
 
 def number_guesser():
@@ -20,7 +10,7 @@ def number_guesser():
         attempts = 0
 
         while True:
-            guess = input("Enter your guess: ").strip()
+            guess = input("Enter your guess: ").strip().lower()
 
             if guess.lower() in ('exit'):
                 print("Thanks for playing. Goodbye!")
