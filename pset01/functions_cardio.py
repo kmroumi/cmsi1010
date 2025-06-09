@@ -37,7 +37,6 @@ def longest_string(strings):
     return longest
 
 
-
 def word_frequencies(s):
     frequencies = {}
     words = s.split()
@@ -49,6 +48,7 @@ def word_frequencies(s):
             frequencies[word] = 1
             
     return frequencies
+
 
 assert is_odd(3) == True
 assert is_odd(8) == False
