@@ -1,43 +1,62 @@
-# ----------------------------------------------------------------------
-# This is the file mad_libs.py
+import random
 
-# The intent is to give you practice writing a complete, interactive
-# Python program using a lot of Python data types, especially lists,
-# sets, and dictionaries.
+templates = [
+    {"text": "The :adjective :animal jumped over the :color fence to steal a :noun.",
+        "author": "Khaleefa"},
+    {"text": "At the :place, I saw a :adjective :person eating a giant :food.",
+        "author": "Khaleefa"},
+    {"text": "My best friend gave me a :adjective gift wrapped in :material and tied with a :color ribbon.", "author": "Omar"},
+    {"text": "Suddenly, the :vehicle exploded into :number pieces of flying :plural_noun!", "author": "Dalal"},
+    {"text": "Before sunrise, the :occupation danced on the :adjective hill with a :noun.", "author": "Tariq"},
+    {"text": "Every :weekday, I wear my lucky :color socks to impress my :noun.",
+        "author": "Fatma"},
+    {"text": "I opened the fridge and a :adjective :animal leapt out, holding a :food.", "author": "Lulu"},
+    {"text": "The :celebrity ran into the room yelling ':exclamation!' and holding a :object.", "author": "Noura"},
+    {"text": "To bake a :adjective cake, you need a pinch of :spice and a lot of :emotion.", "author": "Wadha"},
+    {"text": "We traveled through the :adjective jungle on the back of a :animal to find the lost :noun.", "author": "Ali"}
+]
 
-# Remove ALL of the existing comments in this file prior to submission.
-# You can, and should, add your own comments, but please remove all the
-# comments that are here now.
-# ----------------------------------------------------------------------
+yes_answers = {"yes", "y", "yeah", "yup",
+               "sure", "ok", "okay", "oui", "si", "sí"}
 
-# Things to do:
 
-# Define a bunch of templates in which some of the words begin with a colon (:).
-# The words that begin with a colon are the words that you will ask the user
-# to fill in. An example of a template is:
-#
-#     "The :color :animal :action over the :adjective :plant."
-#
-# You should define a list of at least 10 templates. Be creative!
+def get_user_input(prompt):
+    while True:
+        response = input(f"Enter a {prompt}: ").strip()
+        if 1 <= len(response) <= 30:
+            return response
+        print("Please enter a word between 1 and 30 characters.")
 
-# Your app should begin by selecting a random template. Then, for each word
-# that begins with a colon in the template, prompt the user for a word
-# that fits the description. Make sure that their input is between 1 and 30
-# characters long, to prevent them from making too much of a mess of things.
 
-# After the user has filled in all of the words, print the completed
-# template with the user's words filled in. Then after a blank line, print
-# a line crediting the author of the template. Then, print a couple of blank
-# lines and ask them if they want to play again. If they say "yes" (or "sí"
-# or "oui") or any acceptable version of an affirmative answer, start over
-# with a new random template. Otherwise, say "no", print "Thanks for playing!"
-# and exit the program.
+def play_game():
+    template = random.choice(templates)
+    text = template["text"]
+    author = template["author"]
 
-# Here are some constraints:
+    placeholders = {word[1:] for word in text.split() if word.startswith(":")}
+    user_words = {}
 
-#   1. The templates should be a list of dictionaries, in which each entry
-#      has a "text" fields and an "author" field. The "text" field should
-#      contain the template string, and the "author" field should contain
-#      the name of the person who wrote the template.
-#
-#   2. The possible "yes" answers should be stored in a set.
+    for placeholder in placeholders:
+        user_words[placeholder] = get_user_input(placeholder)
+
+    final_text = text
+    for key, val in user_words.items():
+        final_text = final_text.replace(f":{key}", val)
+
+    print("\n" + final_text)
+    print(f"\n— Template by {author}\n")
+
+
+def main():
+    print("Welcome to Mad Libs!\n")
+    while True:
+        play_game()
+        again = input("Would you like to play again? ").strip().lower()
+        if again not in yes_answers:
+            print("Thanks for playing!")
+            break
+        print()
+
+
+if __name__ == "__main__":
+    main()
