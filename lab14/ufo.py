@@ -15,6 +15,7 @@ GRASS_RECTANGLE = (0, GRASS_TOP, WIDTH, GRASS_HEIGHT)
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Alien Invasion")
+clock = pygame.time.Clock()
 
 
 @dataclass
@@ -40,10 +41,10 @@ class UFO:
 
 
 ufos = [
-    UFO(x=0, y=50),
-    UFO(x=200, y=100, speed=3.5, width=80, height=20),
-    UFO(x=400, y=150, color=(160, 160, 160), width=120, speed=3),
-    UFO(x=600, y=200, speed=4)]
+    UFO(x=0, y=50, speed=30),
+    UFO(x=200, y=100, speed=20, width=80, color=(255, 255, 255)),
+    UFO(x=400, y=150, color=(160, 160, 160), width=120, speed=40),
+    UFO(x=600, y=200, speed=60, color=(32, 168, 219))]
 
 
 def draw_scene():
@@ -54,6 +55,7 @@ def draw_scene():
         ufo.draw()
         ufo.move()
     pygame.display.flip()
+    clock.tick(60)
 
 
 while True:
